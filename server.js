@@ -11,6 +11,6 @@ app.get('/*', function (req, res)
 
 const dev = process.env.NODE_ENV !== 'production'
 
-const port = !dev ? process.env.PORT : 3000
+const port = !dev && process.env.PORT ? process.env.PORT : 3000
 
 app.listen(port);
