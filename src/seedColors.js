@@ -1,0 +1,83 @@
+export default [
+    {
+        paletteName: 'UI Colors',
+        id: "ui-colors",
+        emoji: "🎨",
+        colors: [
+            {name: "red", color: "#9F9835"},
+            {name: "blue", color: "#258743"},
+            {name: "yellow", color: "#6ed447"},
+            {name: "green", color: "#247686"},
+            {name: "black", color: "#724785"},
+            {name: "purple", color: "#251c18"}, 
+            {name: "gray", color: "#25501c"},
+            {name: "pink", color: "#03bac0"},
+            {name: "cyan", color: "#F56356"},
+            {name: "magenta", color: "#F76736"},
+            {name: "orange", color: "#584596"},
+            {name: "white", color: "#F64345"},
+            {name: "aqua", color: "#9047d4"},
+            {name: "violet", color: "#9400d3"},
+            {name: "indigo", color: "#4b0082"},
+            {name: "gdds", color: "#F43496"},
+            {name: "gfd", color: "#349b92"},
+            {name: "afsdg", color: "#F54736"},
+            {name: "hgdfas", color: "#945003"},
+            {name: "grfsgv", color: "#74b508"}
+        ]
+    },
+    {
+        paletteName: 'Flag Colors',
+        id: "flag-colors",
+        emoji: "🏳️‍🌈",
+        colors: [
+            {name: "gdgf", color: "#9F9535"},
+            {name: "4a", color: "#9F9455"},
+            {name: "yeellow", color: "#6ed657"},
+            {name: "t7", color: "#64d657"},
+            {name: "bl6ack", color: "#723585"},
+            {name: "puraple", color: "#251c18"}, 
+            {name: "grafy", color: "#25501c"},
+            {name: "sdfgfd", color: "#03bac0"},
+            {name: "gsdf", color: "#F56356"},
+            {name: "dfgf", color: "#F76736"},
+            {name: "orarnge", color: "#584696"},
+            {name: "dfggf", color: "#647645"},
+            {name: "aquba", color: "#476458"},
+            {name: "hgaf", color: "#9476d3"},
+            {name: "indaerigo", color: "#4b0082"},
+            {name: "gduds", color: "#F43496"},
+            {name: "affdg", color: "#349b92"},
+            {name: "afsdki;g", color: "#F54736"},
+            {name: "hgdfass", color: "#74b408"},
+            {name: "grfsgvl", color: "#74b508"}
+        ]
+    },
+    {
+        paletteName: 'Bird Colors',
+        id: "bird-colors",
+        emoji: "🐦",
+        colors: [
+            {name: "gdfj", color: "#9F9535"},
+            {name: "a4", color: "#9F9455"},
+            {name: "yelluow", color: "#6ed657"},
+            {name: "t7", color: "#567876"},
+            {name: "blacdhgk", color: "#876457"},
+            {name: "pur7ple", color: "#251c18"}, 
+            {name: "gr4ay", color: "#25501c"},
+            {name: "sdhf", color: "#03bac0"},
+            {name: "gdf6h", color: "#F56356"},
+            {name: "dgf4g", color: "#F76736"},
+            {name: "orange4g", color: "#584696"},
+            {name: "dfg765", color: "#647645"},
+            {name: "aqua5", color: "#476458"},
+            {name: "hgfh", color: "#9476d3"},
+            {name: "indisgo", color: "#4b0082"},
+            {name: "g5dds", color: "#F43496"},
+            {name: "afafg", color: "#349b92"},
+            {name: "afsd5g", color: "#F54736"},
+            {name: "hgdf756as", color: "#74b408"},
+            {name: "grfsgv7", color: "#74b508"}
+        ]
+    }
+]

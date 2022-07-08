@@ -1,0 +1,21 @@
+.rc-slider-track {
+  background-color: transparent !important;
+}
+
+.rc-slider-rail {
+  height: 8px !important;
+  color: white;
+}
+
+.rc-slider-handle {
+  background-color: green !important;
+  outline: none !important;
+  border: 2px solid green !important;
+  box-shadow: none !important;
+  margin-top: -3px !important;
+
+  color: #25501c;
+}
+.Select {
+  border: none !important;
+}
