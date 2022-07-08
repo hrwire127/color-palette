@@ -14,6 +14,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 
 const styles =
 {
+    
     Slider: {
         width: "340px",
         margin: "0 10px",
