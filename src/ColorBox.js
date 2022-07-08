@@ -106,6 +106,7 @@ function ColorBox(props)
         }
         return shades.slice(1);
     }
+    
     const changeFormat = (value) =>
     {
         setFormat(value)
