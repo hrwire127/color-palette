@@ -20,12 +20,13 @@ const styles = {
         lineHeight: "30px"
     },
     BtnCopy: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
         width: "60px",
         height: props => (props.showingFullPalette ? "13%" : "6.5%"),
-        left: "40%",
-        right: "40%",
-        top: "45%",
-        position: "absolute",
         textAlign: "center",
         outline: "none",
         border: "none",
@@ -42,8 +43,6 @@ const styles = {
         }
     },
     Box: {
-        width: "20%",
-        height: props => (props.showingFullPalette ? "25%" : "50%"),
         display: "inline-block",
         cursor: "pointer",
         position: "relative",
@@ -51,7 +50,7 @@ const styles = {
         "&:hover button":
         {
             opacity: "0.7"
-        }
+        },
     },
     Title: {
         position: "absolute",
@@ -102,6 +101,22 @@ const styles = {
     },
     smBtnCopy: {
         height: "6.5%"
+    },
+    isColor: {
+        '@media (max-width: 620px)': {
+            width: "50% !important",
+            height: "20% !important",
+        },
+    },
+    isNotColor: {
+        '@media (max-width: 580px)': {
+            width: "25% !important",
+            height: "20% !important",
+        },
+        '@media (max-width: 550px)': {
+            width: "50% !important",
+            height: "10% !important",
+        }
     }
 }
 
@@ -124,11 +139,24 @@ class Box extends Component
     render()
     {
 
-        const { name, background, moreUrl, showLink, classes, showingFullPalette } = this.props;
+        const { name, background, moreUrl, showLink, classes, showingFullPalette, isColor } = this.props;
         const { copied } = this.state;
-        return (
 
-            <div style={{ background: background }} className={classes.Box} >
+        const boxStyle = isColor
+            ? {
+                background,
+                width: "20%",
+                height: "50%",
+            }
+            : {
+                background,
+                width: "20%",
+                height: "25%",
+            }
+        console.log(isColor)
+
+        return (
+            <div style={boxStyle} className={`${classes.Box} ${isColor ? classes.isColor : classes.isNotColor}`} >
                 <div style={{ background: background }} className={`${classes.Overlay} ${copied && classes.Show}`}>
                     <div className={classes.copyText}>Copied</div>
                     <div className={classes.copyText}>{background}</div>

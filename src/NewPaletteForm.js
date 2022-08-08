@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -15,8 +16,9 @@ import ColorPickerForm from './ColorPickerForm';
 import { withStyles } from '@material-ui/styles';
 import { v4 as uuidv4 } from 'uuid';
 import randomColor from 'randomcolor'
+import useWindowSize from "./useWindowSize"
 
-const drawerWidth = 380;
+const drawerWidth = 300;
 
 const styles = {
     content: {
@@ -70,6 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function NewPaletteForm(props)
 {
     const [open, setOpen] = React.useState(false);
+    const [Swipeable] = useWindowSize(849, 0)
     const [currentColor, setCurrentColor] = React.useState("teal");
     const [colors, setColors] = React.useState(props.palettes[0] ? props.palettes[0].colors : [])
     const [newColorName, setNewColorName] = React.useState("")
@@ -90,7 +93,6 @@ function NewPaletteForm(props)
 
     const updateColor = (newColor) =>
     {
-        console.log(newColor.hex)
         setCurrentColor(newColor.hex);
     }
 
@@ -203,64 +205,90 @@ function NewPaletteForm(props)
         }
     })
 
+    const DrawerContent = () => <>
+        <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+            </IconButton>
+        </DrawerHeader>
+
+
+
+        <div className={props.classes.content}>
+            <div>
+                <Typography variant="h4">
+                    Design Palette
+                </Typography>
+                <div>
+                    <Button className={props.classes.btn} onClick={clearColors} variant="contained" color='secondary'>Clear</Button>
+                    <Button className={props.classes.btn} onClick={addRandColor} disabled={colors.length >= props.maxColors} variant="contained" color='primary'>Random</Button>
+                </div>
+            </div>
+
+
+
+
+            <ColorPickerForm
+                maxColors={props.maxColors}
+                currentColor={currentColor}
+                updateColor={updateColor}
+                addNewColor={addNewColor}
+                newColorName={newColorName}
+                handleColorChage={handleColorChage}
+                colors={colors}
+            />
+        </div>
+
+    </>
+
     return (
         <Box sx={{ display: 'flex' }}>
             <PaletteFormNav
-                open={open}
+                open={Swipeable ? false : open}
                 drawerWidth={drawerWidth}
                 handleDrawerOpen={handleDrawerOpen}
                 handleChagePalette={handleChagePalette}
                 newPaletteName={newPaletteName}
                 savePalette={savePalette}
             />
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
+            {Swipeable
+                ? (<SwipeableDrawer
+                    sx={{
                         width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
+                        flexShrink: 0,
+                        '& .MuiDrawer-paper': {
+                            width: drawerWidth,
+                            boxSizing: 'border-box',
+                        },
+                    }}
+                    anchor="left"
+                    open={open}
+                    onOpen={handleDrawerOpen}
+                    onClose={handleDrawerClose}
+                >
+                    <DrawerContent />
+                </SwipeableDrawer>)
+                : (<Drawer
+                    sx={{
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        '& .MuiDrawer-paper': {
+                            width: drawerWidth,
+                            boxSizing: 'border-box',
+                        },
+                    }}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                >
+                    <DrawerContent />
+                </Drawer>)
+            }
+
+
+            <Main
+                open={Swipeable ? true : open}
             >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </DrawerHeader>
-
-
-
-                <div className={props.classes.content}>
-                    <div>
-                        <Typography variant="h4">
-                            Design Palette
-                        </Typography>
-                        <div>
-                            <Button className={props.classes.btn} onClick={clearColors} variant="contained" color='secondary'>Clear</Button>
-                            <Button className={props.classes.btn} onClick={addRandColor} disabled={colors.length >= props.maxColors} variant="contained" color='primary'>Random</Button>
-                        </div>
-                    </div>
-
-
-
-
-                    <ColorPickerForm
-                        maxColors={props.maxColors}
-                        currentColor={currentColor}
-                        updateColor={updateColor}
-                        addNewColor={addNewColor}
-                        newColorName={newColorName}
-                        handleColorChage={handleColorChage}
-                        colors={colors}
-                    />
-                </div>
-
-            </Drawer>
-            <Main open={open}>
                 <DrawerHeader />
                 {
                     <DraggableColorList

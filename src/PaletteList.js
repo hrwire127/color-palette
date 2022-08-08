@@ -34,7 +34,7 @@ const styles = {
         },
     },
     palettes: {
-        // boxSizing: "border-box",
+        marginBottom: 25,
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, 220px)",
@@ -43,7 +43,7 @@ const styles = {
     },
     text: {
         color: "white",
-        fontWeight: 200
+        fontWeight: 700,
     },
     createpalette:
     {
@@ -74,6 +74,19 @@ const styles = {
         animationName: "$example",
         animationDuration: "0.8s",
         animationIterationCount: "infinite"
+    },
+    headline: {
+        color: "#785c5c",
+        fontWeight: 600,
+        fontSize: "3rem",
+    },
+    nopalettes: {
+        textAlign: "center",
+        width: "100%",
+        color: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }
 
@@ -88,20 +101,21 @@ class PaletteList extends Component
                 <div className={classes.container}>
                     <nav className={classes.Nav}>
                         <h1 className={classes.text}>Color Palettes</h1>
-                        <Link to="/palette/new"><Add className={classes.text}>add_circle</Add>
-                            {palettes.length <= 0
-                                && (<div style={{ position: "absolute" }}>
-                                    <img src="/arrow.png" className={classes.img} />
-                                    <p className={classes.createpalette} style={{ width: "100%", fontSize: 13, fontFamily: "", marginTop: 80 }}>CREATE A PALETTE</p>
-                                </div>)
-                            }
+                        <Link to="/palette/new">
+                            <Add className={classes.text}>add_circle</Add>
                         </Link>
                     </nav>
                     {palettes.length > 0
-                        && (<div className={classes.palettes}>
+                        ? (<div className={classes.palettes}>
                             {palettes.map(p => (
                                 <MiniPalette deletePalette={deletePalette} id={p.id} key={p.paletteName} {...p} />
                             ))}
+                        </div>)
+                        : (<div className={classes.nopalettes}>
+                            <div>
+                                <h1 className={classes.headline}>No Palettes Yet</h1>
+                                <p>You can create one <Link to="/palette/new">here</Link></p>
+                            </div>
                         </div>)
                     }
                 </div>

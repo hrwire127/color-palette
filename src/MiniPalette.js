@@ -66,20 +66,21 @@ function MiniPalette(props)
         ></div>
     ))
     return (
-        <Link to={`/palette/${id}`} key={id} style={{ textDecoration: "none" }}>
-            <div className={classes.root}>
-
+        <div className={classes.root}>
+            <Link to={`/palette/${id}`} key={id} style={{ textDecoration: "none" }}>
                 <div className={classes.colors}>
                     {miniColorBoxes}
                 </div>
+            </Link>
 
 
-                <h5 className={classes.title}>
+            <h5 className={classes.title}>
+                <Link to={`/palette/${id}`} key={id} style={{ textDecoration: "none" }}>
                     <div className={classes.desc}> {paletteName}<span className={classes.emoji}>{emoji}</span></div>
-                    <Link to={`/`}> <span className={classes.delete}> <Delete onClick={() => { deletePalette(id) }} /></span></Link>
-                </h5>
-            </div>
-        </Link>
+                </Link>
+                <Link to={`/`}> <span className={classes.delete}> <Delete onClick={() => { deletePalette(id) }} /></span></Link>
+            </h5>
+        </div>
     )
 }
 export default withStyles(styles)(MiniPalette);

@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Button } from '@mui/material';
 import { ChromePicker } from 'react-color';
-
+import useWindowSize from "./useWindowSize"
 import { useParams, useNavigate } from "react-router-dom";
 import DraggableColorList from "./DraggableColorList"
 import { arrayMove } from 'react-sortable-hoc';
@@ -35,69 +35,63 @@ const styles = {
     }
 }
 
-class PaletteFormNav extends Component
+function PaletteFormNav(props)
 {
-    constructor(props)
-    {
-        super(props);
-    }
-    render()
-    {
-
-        const AppBar = styled(MuiAppBar, {
-            shouldForwardProp: (prop) => prop !== 'open',
-        })(({ theme, open }) => ({
+    const AppBar = styled(MuiAppBar, {
+        shouldForwardProp: (prop) => prop !== 'open',
+    })(({ theme, open }) => ({
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(open && {
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginLeft: `${drawerWidth}px`,
             transition: theme.transitions.create(['margin', 'width'], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
             }),
-            ...(open && {
-                width: `calc(100% - ${drawerWidth}px)`,
-                marginLeft: `${drawerWidth}px`,
-                transition: theme.transitions.create(['margin', 'width'], {
-                    easing: theme.transitions.easing.easeOut,
-                    duration: theme.transitions.duration.enteringScreen,
-                }),
-            }),
-        }));
+        }),
+    }));
+    
+    const [SmallBtns] = useWindowSize(400, 0)
+    const { classes, open, drawerWidth, handleDrawerOpen, savePalette, newPaletteName, handleChagePalette } = props;
 
-        const { classes, open, drawerWidth, handleDrawerOpen, savePalette, newPaletteName, handleChagePalette } = this.props;
-        return (
-            <div>
-                <CssBaseline />
-                <AppBar color="default" position="fixed" open={open}>
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <div className={classes.bar}>
+    return (
+        <div>
+            <CssBaseline />
+            <AppBar color="default" position="fixed" open={open}>
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <div className={classes.bar}>
 
-                            <div>
-                                <Typography variant="h6" noWrap component="div">
-                                    New Palette
-                                </Typography>
-                            </div>
-
-                            <div className={classes.buttons}>
-
-                                <PaletteMetaForm handleChagePalette={handleChagePalette} newPaletteName={newPaletteName} savePalette={savePalette} />
-
-                                <Link to='/' ><Button variant="contained" color="secondary">Back</Button></Link>
-                            </div>
+                        <div>
+                            <Typography variant="h6" noWrap component="div">
+                                New Palette
+                            </Typography>
                         </div>
 
-                    </Toolbar>
+                        <div className={classes.buttons}>
 
-                </AppBar>
-            </div>
-        )
-    }
+                            <PaletteMetaForm handleChagePalette={handleChagePalette} newPaletteName={newPaletteName} savePalette={savePalette} />
+
+                            <Link to='/' ><Button variant="contained" color="secondary" size={SmallBtns ? "small" : "medium"}>Back</Button></Link>
+                        </div>
+                    </div>
+
+                </Toolbar>
+
+            </AppBar>
+        </div>
+    )
 }
 
 export default withStyles(styles)(PaletteFormNav)

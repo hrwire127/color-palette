@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import Box from './Box';
 import Navbar from './Navbar';
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 import PaletteFooter from './PaletteFooter'
 import { withStyles } from '@material-ui/styles';
@@ -12,12 +13,15 @@ const styles = {
         height: "100vh"
     },
     goBack: {
+        width: "20%",
         height: "50%",
-        backgroundColor: "black"
+        backgroundColor: "black",
+        '@media (max-width: 620px)': {
+            width: "50% !important",
+            height: "20% !important",
+        },
     },
     Box: {
-        width: "20%",
-        height: props => (props.showingFullPalette ? "25%" : "50%"),
         display: "inline-block",
         cursor: "pointer",
         position: "relative",
@@ -25,11 +29,10 @@ const styles = {
         "&:hover button":
         {
             opacity: "0.7"
-        }
+        },
     },
     BtnCopy: {
         width: "60px",
-        height: "13%",
         left: "40%",
         right: "40%",
         top: "45%",
@@ -47,13 +50,12 @@ const styles = {
         {
             backgroundColor: "rgba(255, 255, 255, 0.822)",
             color: "black"
-        }
+        },
+        padding:4
     },
     copy: {
         textDecoration: "none",
         opacity: "0.7",
-        lineHeight: "25px",
-        height: "6.5%"
     },
     Boxes: {
         height: "89%"
@@ -114,13 +116,13 @@ function ColorBox(props)
     let palette = getPalette(params.id)
     let _shades = gatherShades(params.id, params.color)
     const { classes } = props;
-    const colorBoxes = _shades.map(c => (<Box showingFullPalette={false} key={c.id} name={c.name} background={c[format]} showLink={false} />))
+    const colorBoxes = _shades.map(c => (<Box showingFullPalette={false} key={c.id} name={c.name} background={c[format]} showLink={false} isColor/>))
     return (
         <div className={classes.Palette}>
             <Navbar changeFormat={changeFormat} hideSlider={true} />
             <div className={`${classes.Boxes}`}>
                 {colorBoxes}
-                <div className={`${classes.goBack} ${classes.Box}`}><a className={`${classes.BtnCopy} ${classes.copy}`} href={`/palette/${params.id}`}>Back</a></div>
+                <div className={`${classes.goBack} ${classes.Box}`}><Link className={`${classes.BtnCopy} ${classes.copy}`} to={`/palette/${params.id}`}>Back</Link></div>
             </div>
 
             <PaletteFooter emoji={palette.emoji} paletteName={palette.paletteName} />

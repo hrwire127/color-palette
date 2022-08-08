@@ -49,7 +49,8 @@ function App()
                         <main style={{ padding: "1rem", textAlign: "center" }}>
                             <p>There's nothing here!</p>
                         </main>
-                    } />
+                    }
+                />
                 {/* <Palette palette={generatePalette(seedColors[0])} /> */}
             </Routes>
         </div>

@@ -8,11 +8,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Picker } from "emoji-mart"
+import useWindowSize from "./useWindowSize"
 import 'emoji-mart/css/emoji-mart.css'
 
 function PaletteMetaForm(props)
 {
     const [formState, setFormState] = React.useState("");
+    const [SmallBtns] = useWindowSize(400, 0)
     const [newPaletteName, setNewPaletteName] = React.useState("")
 
 
@@ -42,11 +44,9 @@ function PaletteMetaForm(props)
         savePalette(newPaletteName, newEmoji.native)
     }
 
-
-
     return (
         <div>
-            <Button onClick={handleClickOpen} type='submit' variant="contained" color='primary'>Save</Button>
+            <Button onClick={handleClickOpen} type='submit' variant="contained" color='primary' size={SmallBtns ? "small" : "medium"}>Save</Button>
             <Dialog open={formState === "emoji"}>
                 <Picker onSelect={finishPalette} />
                 <DialogActions>
